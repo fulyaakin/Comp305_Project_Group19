@@ -1,3 +1,5 @@
+package deneme;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -65,13 +67,13 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
-		File file = new File("C:\\Users\\aydin\\Desktop\\discovery_1.txt");
+		File file = new File("src/discovery_1.txt");
 		
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		
 		String firstLine;
 		String[] parts_1;
-		String numberOfTranslations;;
+		String numberOfTranslations;
 		String numberOfWords;
 		
 		firstLine = br.readLine();
@@ -108,21 +110,41 @@ public class Main {
 			
 			String word = parts_2[0];
 			String translation = parts_2[1];
-			
 			strings[i] = word;
 			strings[i+1] = translation; 
 		}
+		int current=0;
+		int word_length=0;
+		boolean convertable=true;
 		
-		char x1 = 'c';
-		char y1 = 'r';
-		
-		if (dg.convertable((int) x1 -97, (int) y1 -97))
-			System.out.println( x1 + " can be convertable to " + y1);
-		else
-			System.out.println(x1 + " can not be convertable to " + y1);
+		for(int i=0; i<y;i++) {
+			word_length=strings[current].length();
+			if(strings[current].equals(strings[current+1])) {
+				System.out.println("Yes");
+				
+			}
+			else if(strings[current].length()!=strings[current+1].length()) {
+				System.out.println("No");
+			}else {
+				for(int j=0;j<word_length;j++) {
+					if(!(dg.convertable((int) strings[current].charAt(j) -97, (int) strings[current+1].charAt(j) -97)) &&
+							(int) strings[current].charAt(j) -97!=(int) strings[current+1].charAt(j) -97	) {
+						convertable=false;
+						System.out.println("No");
+						break;
+					}
+				}
+				if(convertable) {
+					System.out.println("Yes");
+				}
+			}
+			convertable=true;
+			word_length=0;
+			current+=2;	
+		}
+
 
 
 	}
 
 }
-
