@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 class DecryptionGraph
@@ -53,28 +58,48 @@ class DecryptionGraph
 		}
 		return false;
 	}
-}
+} 
 
 
 public class Main {
 
-	public static void main(String[] args) {
-		int x = 9;
-		int y = 5;
-		DecryptionGraph dg = new DecryptionGraph(26);
-		dg.connect((int) 'a' -97, (int) 'b' -97);
-		dg.connect((int) 'b' -97, (int) 'c' -97);
-		dg.connect((int) 'c' -97, (int) 'd' -97);
-		dg.connect((int) 'd' -97, (int) 'e' -97);
-		dg.connect((int) 'e' -97, (int) 'f' -97);
-		dg.connect((int) 'f' -97, (int) 'g' -97);
-		dg.connect((int) 'g' -97, (int) 'h' -97);
-		dg.connect((int) 'h' -97, (int) 'i' -97);
-		dg.connect((int) 'i' -97, (int) 'j' -97);
-		dg.connect((int) 'j' -97, (int) 'z' -97);
+	public static void main(String[] args) throws IOException {
 		
-		char x1 = 'a';
-		char y1 = 'd';
+		File file = new File("C:\\Users\\aydin\\Desktop\\discovery_1.txt");
+		
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		
+		String firstLine;
+		String[] parts;
+		String numberOfTranslations;;
+		String numberOfWords;
+		
+		firstLine = br.readLine();
+		parts = firstLine.split(" ");
+		
+		numberOfTranslations = parts[0];
+		numberOfWords = parts[1];
+		
+		int x = Integer.parseInt(numberOfTranslations);
+		int y = Integer.parseInt(numberOfWords);
+		
+		DecryptionGraph dg = new DecryptionGraph(26);
+		
+		for(int i = 0; i < x; i++) {
+			
+			String line = br.readLine();
+			
+			char source = line.charAt(0);
+			char translation = line.charAt(2);
+			
+			dg.connect((int) source - 97, (int) translation - 97);
+			
+		}
+		
+		
+		char x1 = 'c';
+		char y1 = 'r';
+		
 		if (dg.convertable((int) x1 -97, (int) y1 -97))
 			System.out.println( x1 + " can be convertable to " + y1);
 		else

@@ -1,6 +1,6 @@
 import java.util.*;
 
-class DecryptionGraph
+/**class DecryptionGraph
 {
 	
 	private int vertices; 
@@ -53,5 +53,5 @@ class DecryptionGraph
 		}
 		return false;
 	}
-}
+} **/
 
