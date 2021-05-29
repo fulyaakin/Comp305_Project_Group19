@@ -70,18 +70,17 @@ public class Main {
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		
 		String firstLine;
-		String[] parts;
+		String[] parts_1;
 		String numberOfTranslations;;
 		String numberOfWords;
 		
 		firstLine = br.readLine();
-		parts = firstLine.split(" ");
+		parts_1 = firstLine.split("\\s");
 		
-		numberOfTranslations = parts[0];
-		numberOfWords = parts[1];
+		numberOfTranslations = parts_1[0];
+		numberOfWords = parts_1[1];
 		
 		int x = Integer.parseInt(numberOfTranslations);
-		int y = Integer.parseInt(numberOfWords);
 		
 		DecryptionGraph dg = new DecryptionGraph(26);
 		
@@ -96,6 +95,23 @@ public class Main {
 			
 		}
 		
+		int y = Integer.parseInt(numberOfWords);
+		
+		String line;
+		String[] parts_2;
+		String[] strings = new String[y*2];
+		
+		for(int i = 0; i <= (2*y-2); i = i+2) {
+			
+			line = br.readLine();
+			parts_2 = line.split("\\s");
+			
+			String word = parts_2[0];
+			String translation = parts_2[1];
+			
+			strings[i] = word;
+			strings[i+1] = translation; 
+		}
 		
 		char x1 = 'c';
 		char y1 = 'r';
