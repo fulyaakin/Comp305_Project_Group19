@@ -1,0 +1,17 @@
+10 1
+a b
+a c
+a d
+a e
+a f
+a g
+a h
+a j
+a k
+a l 
+a m
+a n
+a p
+a r
+a r
+35

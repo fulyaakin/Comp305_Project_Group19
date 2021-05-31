@@ -1,5 +1,3 @@
-package deneme;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -66,8 +64,8 @@ class DecryptionGraph
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		
-		File file = new File("src/discovery_1.txt");
+		long startTime = System.nanoTime();
+		File file = new File("src/discovery_6.txt");
 		
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		
@@ -143,7 +141,12 @@ public class Main {
 			current+=2;	
 		}
 
+	    long endTime = System.nanoTime();
 
+	    // get the difference between the two nano time valuess
+	    long timeElapsed = endTime - startTime;
+
+	    System.out.println(timeElapsed / 1000000);
 
 	}
 

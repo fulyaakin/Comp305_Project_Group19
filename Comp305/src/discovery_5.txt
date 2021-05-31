@@ -1,0 +1,18 @@
+15 1
+a b
+a c
+a d
+a e
+b g
+c h
+d i
+e f
+f k
+k l
+l m
+m n
+n o
+o p
+p r
+a r
+63
