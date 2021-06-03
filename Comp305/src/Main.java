@@ -59,9 +59,9 @@ public class Main {
 
 	static LinkedList<Long> times = new LinkedList<Long>();
 
-	public static void algorithm(int q) throws IOException {
+	public static void algorithm(int run) throws IOException {
 		long startTime = System.nanoTime();
-		File file = new File("src/discovery_6.txt");
+		File file = new File("discoveries/discovery_1.txt");
 
 		BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -114,17 +114,23 @@ public class Main {
 		for (int i = 0; i < y; i++) {
 			word_length = strings[current].length();
 			if (strings[current].equals(strings[current + 1])) {
+				if (run == 0)
+				{
 				System.out.println("Yes");
+				}
 
 			} else if (strings[current].length() != strings[current + 1].length()) {
+				if (run == 0)
+				{
 				System.out.println("No");
+				}
 			} else {
 				for (int j = 0; j < word_length; j++) {
 					if (!(dg.convertable((int) strings[current].charAt(j) - 97,
 							(int) strings[current + 1].charAt(j) - 97))
 							&& (int) strings[current].charAt(j) - 97 != (int) strings[current + 1].charAt(j) - 97) {
 						convertable = false;
-						if (q == 0)
+						if (run == 0)
 						{
 						System.out.println("No");
 						}
@@ -132,7 +138,7 @@ public class Main {
 					}
 				}
 				if (convertable) {
-					if (q == 0)
+					if (run == 0)
 					{
 					System.out.println("Yes");
 					}
