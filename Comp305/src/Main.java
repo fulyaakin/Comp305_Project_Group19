@@ -1,163 +1,107 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-class DecryptionGraph {
-
-	private int vertices;
-	private LinkedList<Integer> nodes[];
-
-	// Creating the graph with adjacency list
-	DecryptionGraph(int size) {
-		vertices = size;
-		nodes = new LinkedList[size];
-		for (int i = 0; i < size; ++i)
-			nodes[i] = new LinkedList();
-	}
-
-	// This function is to add a new letter to the graph
-	void connect(int firstLetter, int secondLetter) {
-		nodes[firstLetter].add(secondLetter);
-	}
-
-	// This function is to find whether there is a path from the firstLetter to
-	// secondLetter
-	// It uses BFS while searching
-	Boolean convertable(int firstLetter, int secondLetter) {
-
-		boolean visited[] = new boolean[vertices];
-		LinkedList<Integer> visitedNodes = new LinkedList<Integer>();
-		Iterator<Integer> iter;
-		int nextNode;
-
-		visited[firstLetter] = true;
-		visitedNodes.add(firstLetter);
-
-		while (visitedNodes.size() != 0) {
-			firstLetter = visitedNodes.poll();
-			iter = nodes[firstLetter].listIterator();
-
-			while (iter.hasNext()) {
-				nextNode = iter.next();
-				if (nextNode == secondLetter) {
-					return true;
-				}
-				if (visited[nextNode] == false) {
-					visited[nextNode] = true;
-					visitedNodes.add(nextNode);
-				}
-			}
-		}
-		return false;
-	}
-}
 
 public class Main {
-
-	static LinkedList<Long> times = new LinkedList<Long>();
-
-	public static void algorithm(int q) throws IOException {
-		long startTime = System.nanoTime();
-		File file = new File("src/discovery_6.txt");
-
-		BufferedReader br = new BufferedReader(new FileReader(file));
-
-		String firstLine;
-		String[] parts_1;
-		String numberOfTranslations;
-		String numberOfWords;
-
-		firstLine = br.readLine();
-		parts_1 = firstLine.split("\\s");
-
-		numberOfTranslations = parts_1[0];
-		numberOfWords = parts_1[1];
-
-		int x = Integer.parseInt(numberOfTranslations);
-
-		DecryptionGraph dg = new DecryptionGraph(26);
-
-		for (int i = 0; i < x; i++) {
-
-			String line = br.readLine();
-
-			char source = line.charAt(0);
-			char translation = line.charAt(2);
-
-			dg.connect((int) source - 97, (int) translation - 97);
-
-		}
-
-		int y = Integer.parseInt(numberOfWords);
-
-		String line;
-		String[] parts_2;
-		String[] strings = new String[y * 2];
-
-		for (int i = 0; i <= (2 * y - 2); i = i + 2) {
-
-			line = br.readLine();
-			parts_2 = line.split("\\s");
-
-			String word = parts_2[0];
-			String translation = parts_2[1];
-			strings[i] = word;
-			strings[i + 1] = translation;
-		}
-		int current = 0;
-		int word_length = 0;
-		boolean convertable = true;
-
-		for (int i = 0; i < y; i++) {
-			word_length = strings[current].length();
-			if (strings[current].equals(strings[current + 1])) {
-				System.out.println("Yes");
-
-			} else if (strings[current].length() != strings[current + 1].length()) {
-				System.out.println("No");
-			} else {
-				for (int j = 0; j < word_length; j++) {
-					if (!(dg.convertable((int) strings[current].charAt(j) - 97,
-							(int) strings[current + 1].charAt(j) - 97))
-							&& (int) strings[current].charAt(j) - 97 != (int) strings[current + 1].charAt(j) - 97) {
-						convertable = false;
-						if (q == 0)
-						{
-						System.out.println("No");
+	
+	static HashMap<Character, List<Character>> map = new HashMap<>();
+	
+	static List<Character> list1 = new ArrayList<Character>();
+	static List<Character> list2 = new ArrayList<Character>();
+	static List<Character> list3 = new ArrayList<Character>();
+	static List<Character> list4 = new ArrayList<Character>();
+	static List<Character> list5 = new ArrayList<Character>();
+	static List<Character> list6 = new ArrayList<Character>();
+	static List<Character> list7 = new ArrayList<Character>();
+	static List<Character> list8 = new ArrayList<Character>();
+	
+	
+	static void convertAndCompare(String string_1, String string_2) {
+		
+		for(int i = 0; i < string_1.length(); i++) {
+			
+			while(string_1.charAt(i) != string_2.charAt(i) && string_1.charAt(i) != '0') {
+				
+				StringBuilder sb = new StringBuilder(string_1);
+				
+				if(map.get(string_1.charAt(i)) == null) {
+					sb.setCharAt(i, '0');
+				}
+				else {
+					List<Character> list = new ArrayList<Character>();
+					list = map.get(string_1.charAt(i));
+					
+					for(Character ch : list) {
+						sb.setCharAt(i, ch);
+						
+						if(sb.charAt(i) == string_2.charAt(i)) {
+							break;
 						}
-						break;
 					}
 				}
-				if (convertable) {
-					if (q == 0)
-					{
-					System.out.println("Yes");
-					}
+				
+				string_1 = sb.toString();
+			}
+			
+			if(string_1.charAt(i) == '0') {
+				break;
+			}
+		}
+		
+		if(string_1.equals(string_2)) {
+			System.out.println("yes");
+		}
+		else {
+			System.out.println("no");
+		}
+	
+}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		list1.add('t');
+		list2.add('r');
+		list3.add('p');
+		list4.add('c');
+		list5.add('o');
+		list6.add('e');
+		list6.add('f');
+		list7.add('h');
+		list8.add('p');
+		
+		map.put('c', list1);
+		map.put('i', list2);
+		map.put('k', list3);
+		map.put('o', list4);
+		map.put('r', list5);
+		map.put('t', list6);
+		map.put('u', list7);
+		map.put('w', list8);
+		 
+		String[] strings = new String[] {"we", "we",
+										"can", "the",
+										"work", "people",
+										"it", "of",
+										"out", "the"};
+		
+		
+		int y = 5;
+		
+		for(int i = 0; i <= (2 * y - 2); i += 2) {
+			if(strings[i].length() != strings[i+1].length()) {
+				System.out.println("no");
+			}
+			else {
+				if(strings[i].equals(strings[i+1])) {
+					System.out.println("yes");
+				}
+				else {
+					convertAndCompare(strings[i], strings[i+1]);
 				}
 			}
-			convertable = true;
-			word_length = 0;
-			current += 2;
-		}
+		}	
 
-		long endTime = System.nanoTime();
-
-		// get the difference between the two nano time valuess
-		long timeElapsed = endTime - startTime;
-		times.add(timeElapsed);
-
-	}
-	
-	public static void main(String[] args) throws IOException {
-		
-		for (int i = 0; i < 500; i++)
-		{
-			algorithm(i);
-		}
-		System.out.println(Collections.max(times) / 1000000);
-	}
-
+}
 }
