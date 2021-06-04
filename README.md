@@ -28,7 +28,7 @@ Algorithm:
 
 
 Results for test cases:
-  In the results folder.
+  In the results file.
 
 Run times for test cases:
   Discovery_1.txt: 25ms	Discovery_2.txt: 24ms	Discovery_3.txt: 35ms	Discovery_4.txt: 31ms
