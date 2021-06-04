@@ -1,6 +1,6 @@
 # Comp305_Project_Group19
 How to run the code:
-javac Main.java && java Main.java
+javac Main.java && java Main
 
 Problem:
 Decrypting efficiently the text found in Cappadocia
