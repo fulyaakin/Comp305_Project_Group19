@@ -60,7 +60,7 @@ public class Main {
 
 	public static void algorithm(int run) throws IOException {
 		long startTime = System.nanoTime();
-		File file = new File("discoveries/discovery_1.txt");
+		File file = new File("./src/discoveries/discovery_1.txt");
 
 		BufferedReader br = new BufferedReader(new FileReader(file));
 
